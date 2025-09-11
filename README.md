@@ -1,8 +1,8 @@
 # 👋 Hi, I'm Alfa Victor Lugard  
 
-🎓 **PhD Candidate in Public Policy & Political Economy**  
-📊 **M.Sc. Candidate in Data Analytics**  
-🏛️ **University of Texas at Dallas**  
+**PhD Candidate in Public Policy & Political Economy**  
+**M.Sc. Candidate in Data Analytics**  
+🏛**University of Texas at Dallas**  
 
 ---
 
