@@ -2,7 +2,7 @@
 
 **PhD Candidate in Public Policy & Political Economy**  
 **M.Sc. Candidate in Data Analytics**  
-🏛**University of Texas at Dallas**  
+**University of Texas at Dallas**  
 
 ---
 
@@ -16,9 +16,9 @@ My interests include:
 ---
 
 ## 🔹 Current Projects
-- 📈 **Structural Adjustment in Nigeria (1986)** – Data & policy analysis on IMF/World Bank SAP  
-- 🚆 **Technology Transfer in Africa** – Chinese railway projects & local capacity building  
-- 📊 **Machine Learning for Socio-Economic Data** – Using R & Python for classification, regression, and survival models  
+- **Structural Adjustment in Nigeria (1986)** – Data & policy analysis on IMF/World Bank SAP  
+- **Technology Transfer in Africa** – Chinese railway projects & local capacity building  
+- **Machine Learning for Socio-Economic Data** – Using R & Python for classification, regression, and survival models  
 
 ---
 
