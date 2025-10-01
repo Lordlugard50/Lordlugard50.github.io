@@ -12,11 +12,12 @@
     }
     .sidebar {
       width: 260px;
-      background: #1e2145;
+      background: #004d40; /* Dark Green sidebar */
       color: white;
       height: 100vh;
       padding: 20px;
       position: fixed;
+      overflow-y: auto;
     }
     .sidebar img {
       width: 120px;
@@ -44,12 +45,26 @@
       border-radius: 5px;
     }
     .sidebar a:hover {
-      background: #343a78;
+      background: #00695c;
+    }
+    .submenu {
+      margin-left: 15px;
+      display: none;
+    }
+    .sidebar a.toggle + .submenu {
+      display: none;
+    }
+    .sidebar a.toggle.active + .submenu {
+      display: block;
+    }
+    .submenu a {
+      font-size: 14px;
+      background: #00796b;
     }
     .content {
       margin-left: 280px;
       padding: 40px;
-      background: #f8f5f0;
+      background: #f0f0f0; /* Light Gray background */
       min-height: 100vh;
       flex: 1;
     }
@@ -66,6 +81,11 @@
       color: #777;
     }
   </style>
+  <script>
+    function toggleMenu(id) {
+      document.getElementById(id).classList.toggle("active");
+    }
+  </script>
 </head>
 <body>
   <!-- Sidebar -->
@@ -73,12 +93,41 @@
     <img src="profile.jpg" alt="Profile Picture">
     <h2>Alfa Victor Lugard</h2>
     <p>PhD Candidate · M.Sc. Data Analytics<br>University of Texas at Dallas</p>
+
     <a href="#home">🏠 Home</a>
-    <a href="#about">👤 About Me</a>
-    <a href="#cv">📄 My CV</a>
-    <a href="#assignments">📑 Assignments</a>
-    <a href="#dataviz">📊 Data Visualization</a>
-    <a href="#projects">🚀 Projects</a>
+
+    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('aboutSub')">👤 About Me</a>
+    <div class="submenu" id="aboutSub">
+      <a href="#about">Biography</a>
+      <a href="#skills">Skills</a>
+    </div>
+
+    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('cvSub')">📄 My CV</a>
+    <div class="submenu" id="cvSub">
+      <a href="cv.pdf" target="_blank">View CV</a>
+      <a href="#">Resume Highlights</a>
+    </div>
+
+    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('assignSub')">📑 Assignments</a>
+    <div class="submenu" id="assignSub">
+      <a href="assignments/assignment1.pdf" target="_blank">Assignment 1</a>
+      <a href="assignments/assignment2.pdf" target="_blank">Assignment 2</a>
+      <a href="assignments/assignment3.pdf" target="_blank">Assignment 3</a>
+    </div>
+
+    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('vizSub')">📊 Data Visualization</a>
+    <div class="submenu" id="vizSub">
+      <a href="#">Visualization 1</a>
+      <a href="#">Visualization 2</a>
+    </div>
+
+    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('projSub')">🚀 Projects</a>
+    <div class="submenu" id="projSub">
+      <a href="#projects">SAP in Nigeria</a>
+      <a href="#projects">Tech Transfer in Africa</a>
+      <a href="#projects">Machine Learning for Data</a>
+    </div>
+
     <a href="#contact">📬 Contact</a>
   </div>
 
@@ -87,12 +136,11 @@
     <h1>Welcome to My Portfolio Hub</h1>
     <p>Explore my assignments, projects, and research initiatives.</p>
 
-    <!-- About Me -->
     <div class="card" id="about">
       <h2>👤 About Me</h2>
       <p>I am Alfa Victor Lugard, a PhD Candidate in Public Policy & Political Economy 
       and M.Sc. Candidate in Data Analytics at the University of Texas at Dallas.</p>
-      <p>My research interests include:</p>
+      <p>Research Interests:</p>
       <ul>
         <li>Development economics & African political economy</li>
         <li>Machine learning & social data analytics</li>
@@ -100,44 +148,15 @@
       </ul>
     </div>
 
-    <!-- CV -->
-    <div class="card" id="cv">
-      <h2>📄 My CV</h2>
-      <p>Download my CV here:</p>
-      <p><a href="cv.pdf" target="_blank">📥 Click to View/Download</a></p>
-    </div>
-
-    <!-- Assignments -->
-    <div class="card" id="assignments">
-      <h2>📑 Assignments</h2>
-      <ul>
-        <li><a href="assignments/assignment1.pdf" target="_blank">Assignment 1: Data Collection</a></li>
-        <li><a href="assignments/assignment2.pdf" target="_blank">Assignment 2: Data Visualization</a></li>
-        <li><a href="assignments/assignment3.pdf" target="_blank">Assignment 3: Machine Learning Models</a></li>
-      </ul>
-    </div>
-
-    <!-- Data Visualization -->
-    <div class="card" id="dataviz">
-      <h2>📊 Data Visualization</h2>
-      <p>Projects from EPPS-6356: Data Visualization</p>
-      <ul>
-        <li>Visualization Project 1 – <a href="#">View</a></li>
-        <li>Visualization Project 2 – <a href="#">View</a></li>
-      </ul>
-    </div>
-
-    <!-- Projects -->
     <div class="card" id="projects">
       <h2>🚀 Projects</h2>
       <ul>
-        <li><strong>Structural Adjustment in Nigeria (1986):</strong> Data & policy analysis on IMF/World Bank SAP</li>
-        <li><strong>Technology Transfer in Africa:</strong> Chinese railway projects & local capacity building</li>
-        <li><strong>Machine Learning for Socio-Economic Data:</strong> Using R & Python for classification, regression, survival models</li>
+        <li><b>Structural Adjustment in Nigeria (1986):</b> Data & policy analysis on IMF/World Bank SAP</li>
+        <li><b>Technology Transfer in Africa:</b> Chinese railway projects & local capacity building</li>
+        <li><b>Machine Learning for Socio-Economic Data:</b> Using R & Python for classification, regression, survival models</li>
       </ul>
     </div>
 
-    <!-- Contact -->
     <div class="card" id="contact">
       <h2>📬 Contact</h2>
       <p>Email: <a href="mailto:lordlugard50@gmail.com">lordlugard50@gmail.com</a></p>
