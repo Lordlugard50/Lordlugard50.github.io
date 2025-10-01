@@ -12,7 +12,7 @@
     }
     .sidebar {
       width: 260px;
-      background: #004d40; /* Dark Black sidebar */
+      background: #1e1e2f; /* Modern Navy Blue */
       color: white;
       height: 100vh;
       padding: 20px;
@@ -43,28 +43,24 @@
       text-decoration: none;
       margin: 4px 0;
       border-radius: 5px;
+      cursor: pointer;
     }
     .sidebar a:hover {
-      background: #00695c;
+      background: #343457;
     }
     .submenu {
       margin-left: 15px;
       display: none;
     }
-    .sidebar a.toggle + .submenu {
-      display: none;
-    }
-    .sidebar a.toggle.active + .submenu {
-      display: block;
-    }
     .submenu a {
       font-size: 14px;
-      background: #00796b;
+      background: #2a2a45;
+      margin: 2px 0;
     }
     .content {
       margin-left: 280px;
       padding: 40px;
-      background: #f0f0f0; /* Light Gray background */
+      background: #f7f7f7;
       min-height: 100vh;
       flex: 1;
     }
@@ -83,7 +79,8 @@
   </style>
   <script>
     function toggleMenu(id) {
-      document.getElementById(id).classList.toggle("active");
+      var submenu = document.getElementById(id);
+      submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
     }
   </script>
 </head>
@@ -96,39 +93,44 @@
 
     <a href="#home">🏠 Home</a>
 
-    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('aboutSub')">👤 About Me</a>
+    <a onclick="toggleMenu('aboutSub')">👤 About Me</a>
     <div class="submenu" id="aboutSub">
       <a href="#about">Biography</a>
       <a href="#skills">Skills</a>
     </div>
 
-    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('cvSub')">📄 My CV</a>
+    <a onclick="toggleMenu('cvSub')">📄 My CV</a>
     <div class="submenu" id="cvSub">
       <a href="cv.pdf" target="_blank">View CV</a>
       <a href="#">Resume Highlights</a>
     </div>
 
-    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('assignSub')">📑 Assignments</a>
+    <a onclick="toggleMenu('assignSub')">📑 Assignments</a>
     <div class="submenu" id="assignSub">
       <a href="assignments/assignment1.pdf" target="_blank">Assignment 1</a>
       <a href="assignments/assignment2.pdf" target="_blank">Assignment 2</a>
       <a href="assignments/assignment3.pdf" target="_blank">Assignment 3</a>
     </div>
 
-    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('vizSub')">📊 Data Visualization</a>
+    <a onclick="toggleMenu('vizSub')">📊 Data Visualization</a>
     <div class="submenu" id="vizSub">
       <a href="#">Visualization 1</a>
       <a href="#">Visualization 2</a>
     </div>
 
-    <a href="javascript:void(0)" class="toggle" onclick="toggleMenu('projSub')">🚀 Projects</a>
+    <a onclick="toggleMenu('projSub')">🚀 Projects</a>
     <div class="submenu" id="projSub">
       <a href="#projects">SAP in Nigeria</a>
       <a href="#projects">Tech Transfer in Africa</a>
       <a href="#projects">Machine Learning for Data</a>
     </div>
 
-    <a href="#contact">📬 Contact</a>
+    <a onclick="toggleMenu('contactSub')">📬 Contact</a>
+    <div class="submenu" id="contactSub">
+      <a href="mailto:lordlugard50@gmail.com">Email</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://lugardfoundation.org" target="_blank">Lugard Foundation</a>
+    </div>
   </div>
 
   <!-- Main Content -->
@@ -140,12 +142,6 @@
       <h2>👤 About Me</h2>
       <p>I am Alfa Victor Lugard, a PhD Candidate in Public Policy & Political Economy 
       and M.Sc. Candidate in Data Analytics at the University of Texas at Dallas.</p>
-      <p>Research Interests:</p>
-      <ul>
-        <li>Development economics & African political economy</li>
-        <li>Machine learning & social data analytics</li>
-        <li>Technology transfer & innovation policy</li>
-      </ul>
     </div>
 
     <div class="card" id="projects">
@@ -155,14 +151,6 @@
         <li><b>Technology Transfer in Africa:</b> Chinese railway projects & local capacity building</li>
         <li><b>Machine Learning for Socio-Economic Data:</b> Using R & Python for classification, regression, survival models</li>
       </ul>
-    </div>
-
-    <div class="card" id="contact">
-      <h2>📬 Contact</h2>
-      <p>Email: <a href="mailto:lordlugard50@gmail.com">lordlugard50@gmail.com</a></p>
-      <p>🌐 <a href="https://lugardfoundation.org" target="_blank">Lugard Foundation</a></p>
-      <p>💼 <a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
-      <p>🐙 <a href="https://github.com/Lordlugard50" target="_blank">GitHub</a></p>
     </div>
 
     <footer>
