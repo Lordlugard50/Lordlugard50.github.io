@@ -1,3 +1,5 @@
+<img src="profile.jpg" alt="Alfa Victor Lugard" width="200" style="border-radius: 50%;" />
+
 # 👋 Welcome to My Portfolio Hub  
 
 Hi, I'm **Alfa Victor Lugard**  
