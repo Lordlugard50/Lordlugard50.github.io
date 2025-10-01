@@ -1,4 +1,6 @@
-<img src="profile.jpg" alt="Alfa Victor Lugard" width="200" style="border-radius: 50%;" />
+<p align="center">
+  <img src="profile.jpg" alt="Alfa Victor Lugard" width="220" style="border-radius: 50%; object-fit: cover;" />
+</p>
 
 # 👋 Welcome to My Portfolio Hub  
 
