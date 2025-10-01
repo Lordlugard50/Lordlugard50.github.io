@@ -20,7 +20,9 @@
     }
     .sidebar img {
       width: 120px;
+      height: 120px;
       border-radius: 50%;
+      object-fit: cover;
       display: block;
       margin: 0 auto 10px;
     }
@@ -71,25 +73,77 @@
     <img src="profile.jpg" alt="Profile Picture">
     <h2>Alfa Victor Lugard</h2>
     <p>PhD Candidate · M.Sc. Data Analytics<br>University of Texas at Dallas</p>
-    <a href="#">🏠 Home</a>
-    <a href="#">👤 About Me</a>
-    <a href="#">📄 My CV</a>
-    <a href="#">📑 Assignments</a>
-    <a href="#">📊 Data Visualization</a>
-    <a href="#">🚀 Projects</a>
-    <a href="#">💡 CampusGives</a>
+    <a href="#home">🏠 Home</a>
+    <a href="#about">👤 About Me</a>
+    <a href="#cv">📄 My CV</a>
+    <a href="#assignments">📑 Assignments</a>
+    <a href="#dataviz">📊 Data Visualization</a>
+    <a href="#projects">🚀 Projects</a>
+    <a href="#contact">📬 Contact</a>
   </div>
 
   <!-- Main Content -->
-  <div class="content">
+  <div class="content" id="home">
     <h1>Welcome to My Portfolio Hub</h1>
     <p>Explore my assignments, projects, and research initiatives.</p>
 
-    <div class="card">
-      <h2>⚡ Highlight: CampusGives</h2>
-      <p><strong>CampusGives</strong> is a student-led donation platform to support peers.  
-      Learn how students are helping each other by clicking below:</p>
-      <p><a href="#">👉 Learn more about CampusGives</a></p>
+    <!-- About Me -->
+    <div class="card" id="about">
+      <h2>👤 About Me</h2>
+      <p>I am Alfa Victor Lugard, a PhD Candidate in Public Policy & Political Economy 
+      and M.Sc. Candidate in Data Analytics at the University of Texas at Dallas.</p>
+      <p>My research interests include:</p>
+      <ul>
+        <li>Development economics & African political economy</li>
+        <li>Machine learning & social data analytics</li>
+        <li>Technology transfer & innovation policy</li>
+      </ul>
+    </div>
+
+    <!-- CV -->
+    <div class="card" id="cv">
+      <h2>📄 My CV</h2>
+      <p>Download my CV here:</p>
+      <p><a href="cv.pdf" target="_blank">📥 Click to View/Download</a></p>
+    </div>
+
+    <!-- Assignments -->
+    <div class="card" id="assignments">
+      <h2>📑 Assignments</h2>
+      <ul>
+        <li><a href="assignments/assignment1.pdf" target="_blank">Assignment 1: Data Collection</a></li>
+        <li><a href="assignments/assignment2.pdf" target="_blank">Assignment 2: Data Visualization</a></li>
+        <li><a href="assignments/assignment3.pdf" target="_blank">Assignment 3: Machine Learning Models</a></li>
+      </ul>
+    </div>
+
+    <!-- Data Visualization -->
+    <div class="card" id="dataviz">
+      <h2>📊 Data Visualization</h2>
+      <p>Projects from EPPS-6356: Data Visualization</p>
+      <ul>
+        <li>Visualization Project 1 – <a href="#">View</a></li>
+        <li>Visualization Project 2 – <a href="#">View</a></li>
+      </ul>
+    </div>
+
+    <!-- Projects -->
+    <div class="card" id="projects">
+      <h2>🚀 Projects</h2>
+      <ul>
+        <li><strong>Structural Adjustment in Nigeria (1986):</strong> Data & policy analysis on IMF/World Bank SAP</li>
+        <li><strong>Technology Transfer in Africa:</strong> Chinese railway projects & local capacity building</li>
+        <li><strong>Machine Learning for Socio-Economic Data:</strong> Using R & Python for classification, regression, survival models</li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="card" id="contact">
+      <h2>📬 Contact</h2>
+      <p>Email: <a href="mailto:lordlugard50@gmail.com">lordlugard50@gmail.com</a></p>
+      <p>🌐 <a href="https://lugardfoundation.org" target="_blank">Lugard Foundation</a></p>
+      <p>💼 <a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
+      <p>🐙 <a href="https://github.com/Lordlugard50" target="_blank">GitHub</a></p>
     </div>
 
     <footer>
