@@ -2,26 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Alfa Victor Lugard · Portfolio Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Alfa Victor Lugard – PhD Candidate in Public Policy & Political Economy and M.Sc. Candidate in Data Analytics at The University of Texas at Dallas." />
+  <title>Alfa Victor Lugard · Data & AI Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
       --bg-dark: #050816;
-      --bg-dark-soft: #0b1020;
-      --accent: #4f46e5;
-      --accent-soft: rgba(79, 70, 229, 0.15);
+      --bg-darker: #02030a;
+      --bg-card: #0b1020;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
-      --border-subtle: #e5e7eb;
-      --card-bg: #ffffff;
-      --card-bg-soft: #f9fafb;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.35);
-      --radius-lg: 18px;
-      --radius-full: 999px;
-      --nav-height: 72px;
-      --transition-fast: 0.18s ease-out;
+      --border-soft: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.7);
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --transition-fast: 0.2s ease;
+      --transition-med: 0.3s ease;
     }
 
     * {
@@ -31,11 +34,10 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      color: #111827;
-      background: #f3f4f6;
-      line-height: 1.6;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
       scroll-behavior: smooth;
     }
 
@@ -44,1144 +46,1048 @@
       text-decoration: none;
     }
 
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
     img {
       max-width: 100%;
-      height: auto;
       display: block;
     }
 
-    /* ---------- NAVBAR ---------- */
+    /* Layout wrapper */
+    .page-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+    }
 
+    /* NAVBAR */
     .navbar {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(5, 6, 24, 0.95), rgba(10, 12, 34, 0.95));
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 10px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.75rem;
-      z-index: 40;
-      background: radial-gradient(circle at top left, #1d2671 0, #050816 55%);
-      color: var(--text-main);
-      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.6);
+      margin-bottom: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 12px;
     }
 
-    .nav-logo-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 2px solid rgba(248, 250, 252, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #1f2937, #111827);
-      font-weight: 700;
-      font-size: 0.9rem;
+    .nav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      background: #111827;
     }
 
     .nav-title {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .nav-title span:first-child {
       font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-title span:last-child {
+      color: var(--text-muted);
+      font-size: 11px;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      font-size: 0.9rem;
+      gap: 18px;
+      font-size: 14px;
     }
 
-    .nav-links a {
+    .nav-link {
       position: relative;
-      padding-bottom: 2px;
+      padding: 6px 10px;
+      border-radius: 999px;
       color: var(--text-muted);
-      transition: color var(--transition-fast);
+      cursor: pointer;
+      transition: color var(--transition-fast), background var(--transition-fast);
     }
 
-    .nav-links a::after {
+    .nav-link:hover {
+      color: var(--text-main);
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    .nav-link.active {
+      color: #e5e7eb;
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    .nav-link.active::after {
       content: "";
       position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
+      left: 50%;
+      bottom: -6px;
+      width: 14px;
+      height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #4f46e5, #22c1c3);
-      transition: width var(--transition-fast);
+      background: var(--accent-gradient);
+      transform: translateX(-50%);
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text-main);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Mobile nav */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .nav-toggle span {
-      width: 22px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--text-main);
-    }
-
-    .nav-links-mobile {
-      display: none;
-      position: fixed;
-      top: var(--nav-height);
-      left: 0;
-      right: 0;
-      background: #020617;
-      color: var(--text-main);
-      padding: 0.75rem 1.75rem 1.25rem;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-      z-index: 35;
-    }
-
-    .nav-links-mobile a {
-      display: block;
-      padding: 0.4rem 0;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    .nav-links-mobile a:hover {
-      color: var(--text-main);
-    }
-
-    /* ---------- LAYOUT ---------- */
-
-    .hero-wrapper {
-      background: radial-gradient(circle at 10% 20%, #1d2671 0, #050816 55%);
-      color: var(--text-main);
-      padding-top: calc(var(--nav-height) + 2.5rem);
-      padding-bottom: 4rem;
-    }
-
-    .hero-inner,
-    .section-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
+    /* HERO */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
-      align-items: center;
-      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      margin-top: 26px;
+      margin-bottom: 40px;
+      align-items: stretch;
     }
 
-    .hero-kicker {
-      font-size: 0.82rem;
+    .hero-left {
+      padding: 30px 26px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #111827 0, #020617 50%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.35) 0, transparent 40%),
+                  radial-gradient(circle at bottom right, rgba(139,92,246,0.35) 0, transparent 40%);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-kicker span.dot {
-      width: 8px;
-      height: 8px;
+    .hero-tagline-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.65);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
     }
 
     .hero-title {
-      font-size: clamp(2rem, 3.1vw, 2.6rem);
+      font-size: clamp(32px, 4vw, 40px);
       line-height: 1.1;
-      margin-bottom: 1rem;
-      font-weight: 800;
+      font-weight: 700;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-title span.highlight {
-      background: linear-gradient(120deg, #a855f7, #4f46e5, #22d3ee);
+      background: var(--accent-gradient);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero-subtitle {
-      font-size: 0.98rem;
+      font-size: 15px;
       color: var(--text-muted);
-      max-width: 34rem;
-      margin-bottom: 1.75rem;
+      max-width: 650px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-meta {
+    .hero-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.75rem;
+      gap: 8px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
     }
 
-    .meta-pill {
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.78rem;
+    .chip {
+      font-size: 11px;
+      padding: 6px 10px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
       color: #e5e7eb;
-      background: rgba(15, 23, 42, 0.4);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .btn-primary,
-    .btn-ghost {
-      border-radius: var(--radius-full);
-      padding: 0.6rem 1.3rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: transform var(--transition-fast),
-        box-shadow var(--transition-fast),
-        background var(--transition-fast),
-        color var(--transition-fast);
+      gap: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #4f46e5, #22c1c3);
-      color: #f9fafb;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.45);
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background-image: var(--accent-gradient);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
+      box-shadow: 0 16px 45px rgba(37, 99, 235, 0.65);
+      opacity: 0.96;
     }
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-main);
-      border: 1px solid rgba(148, 163, 184, 0.8);
+    .btn-secondary {
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
     }
 
-    .btn-ghost:hover {
-      background: rgba(15, 23, 42, 0.6);
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(148, 163, 184, 0.9);
       transform: translateY(-1px);
     }
 
-    /* Hero right */
-
-    .hero-card {
-      background: radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.3), transparent 50%),
-        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.55), transparent 55%);
-      padding: 1.1rem;
-      border-radius: 28px;
-      box-shadow: var(--shadow-soft);
+    .hero-right {
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9) 0, rgba(15, 23, 42, 1) 40%);
       border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .hero-photo {
-      position: relative;
       border-radius: 22px;
       overflow: hidden;
-      background: #020617;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      height: 240px;
+      background: #020617 url("profile.jpg") center/cover no-repeat;
     }
 
-    .hero-photo img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
-      object-position: center;
-      filter: saturate(1.1);
-    }
-
-    .hero-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 20%, transparent 0, rgba(15, 23, 42, 0.65) 75%);
-    }
-
-    .hero-photo-badge {
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      padding: 0.35rem 0.9rem;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      color: #e5e7eb;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      z-index: 2;
-    }
-
-    .hero-photo-badge span.dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-    }
-
-    .hero-card-footer {
-      margin-top: 0.9rem;
-      font-size: 0.82rem;
-      color: #e5e7eb;
+    .hero-meta-row {
       display: flex;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 10px;
+      font-size: 11px;
     }
 
-    .hero-card-footer span.label {
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: 0.7rem;
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      font-weight: 500;
+    }
+
+    .badge-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-meta-block {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
       color: var(--text-muted);
     }
 
-    /* ---------- MAIN SECTIONS ---------- */
-
-    main {
-      background: #f3f4f6;
-    }
-
-    section {
-      padding: 3.5rem 0;
-    }
-
-    section:nth-of-type(odd) {
-      background: #f9fafb;
-    }
-
-    section:nth-of-type(even) {
-      background: #ffffff;
-    }
-
-    .section-header {
-      margin-bottom: 1.8rem;
-    }
-
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #6b7280;
-      margin-bottom: 0.25rem;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 0.4rem;
-    }
-
-    .section-subtitle {
-      font-size: 0.92rem;
-      color: #6b7280;
-      max-width: 40rem;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.3rem;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-      color: #111827;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 0.75rem;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      padding: 0.18rem 0.55rem;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: #3730a3;
-    }
-
-    .link-row a {
-      font-size: 0.85rem;
-      color: #2563eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .link-row a:hover {
-      text-decoration: underline;
-    }
-
-    /* Lists */
-    .resource-list {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 0.75rem;
-    }
-
-    .resource-list li + li {
-      margin-top: 0.3rem;
-    }
-
-    .resource-list a {
-      font-size: 0.9rem;
-      color: #2563eb;
-    }
-
-    .resource-list a:hover {
-      text-decoration: underline;
-    }
-
-    /* CV card */
-    .cv-card {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .cv-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    /* Contact */
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      gap: 1.5rem;
-    }
-
-    .contact-list {
-      list-style: none;
-      margin-top: 0.75rem;
-    }
-
-    .contact-list li {
-      margin-bottom: 0.5rem;
-      font-size: 0.92rem;
-    }
-
-    .pill-muted {
-      display: inline-block;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: #e5e7eb;
-      font-size: 0.7rem;
+    .hero-meta-label {
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #4b5563;
-      margin-left: 0.35rem;
+      margin-bottom: 3px;
+      color: #6b7280;
     }
 
-    footer {
-      padding: 1.4rem 1.5rem 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
+    .hero-meta-value {
+      font-size: 12px;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    /* SECTION WRAPPER */
+    .sections-wrapper {
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      border-radius: 26px;
+      padding: 26px 26px 30px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 32px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-heading small {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ACCORDION */
+    .accordion-section {
+      margin-bottom: 16px;
+    }
+
+    .accordion {
+      border-radius: 18px;
       background: #020617;
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
     }
 
-    /* ---------- RESPONSIVE ---------- */
+    .accordion.open {
+      border-color: rgba(59, 130, 246, 0.8);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.9);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18) 0, #020617 45%);
+    }
 
-    @media (max-width: 880px) {
+    .accordion-header {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .accordion-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .accordion-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .accordion-chevron {
+      font-size: 16px;
+      color: var(--text-muted);
+      transition: transform var(--transition-fast);
+    }
+
+    .accordion.open .accordion-chevron {
+      transform: rotate(90deg);
+    }
+
+    .accordion-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      transition: max-height var(--transition-med);
+    }
+
+    .accordion.open .accordion-content {
+      max-height: 700px; /* large enough for content */
+      padding-bottom: 14px;
+    }
+
+    .accordion-inner {
+      padding-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .item-list {
+      margin-top: 6px;
+    }
+
+    .item-list li {
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(55, 65, 81, 0.7);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .item-list li:last-child {
+      border-bottom: none;
+    }
+
+    .item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .item-title {
+      font-size: 13px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .item-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .badge-link {
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-link:hover {
+      background: rgba(30, 64, 175, 0.9);
+      border-color: rgba(59, 130, 246, 0.9);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      margin-top: 10px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-card {
-        max-width: 420px;
-        margin: 0 auto;
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
       }
-
-      .hero-inner {
-        padding-bottom: 0.5rem;
-      }
-
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .nav-links {
+        flex-wrap: wrap;
       }
     }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+    @media (max-width: 640px) {
+      .page-wrapper {
+        padding: 12px 12px 30px;
       }
-      .nav-toggle {
-        display: flex;
+      .hero-left,
+      .hero-right,
+      .sections-wrapper {
+        padding: 18px;
       }
-
-      .hero-inner,
-      .section-inner {
-        padding: 0 1.1rem;
+      .navbar {
+        padding: 8px 14px;
       }
     }
   </style>
 </head>
-
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="nav-left">
-      <div class="nav-logo-circle">AL</div>
-      <div class="nav-title">Alfa Victor Lugard</div>
-    </div>
+  <div class="page-wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="nav-avatar">
+          <!-- Uses profile.jpg in repo root -->
+          <img src="profile.jpg" alt="Alfa Victor Lugard" />
+        </div>
+        <div class="nav-title">
+          <span>ALFA VICTOR LUGARD</span>
+          <span>PhD · Data Analytics · UTD</span>
+        </div>
+      </div>
 
-    <nav class="nav-links">
-      <a href="#home" class="active">Home</a>
-      <a href="#about">About</a>
-      <a href="#cv">CV</a>
-      <a href="#data-collection">Data Collection</a>
-      <a href="#data-vis">Data Visualization</a>
-      <a href="#internet-mapping">Internet Mapping</a>
-      <a href="#cybersecurity">Cybersecurity</a>
-      <a href="#contact">Contact</a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#cv" class="nav-link">CV</a>
+        <a href="#data-collection" class="nav-link">Data Collection</a>
+        <a href="#data-visualization" class="nav-link">Data Visualization</a>
+        <a href="#internet-mapping" class="nav-link">Internet Mapping</a>
+        <a href="#cybersecurity" class="nav-link">Cybersecurity</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
     </nav>
 
-    <div class="nav-toggle" id="navToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-left">
+        <div class="hero-tagline">
+          <span class="hero-tagline-dot"></span>
+          <span>Research • Data • Policy</span>
+        </div>
 
-  <!-- Mobile nav -->
-  <nav class="nav-links-mobile" id="navMobile">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#cv">CV</a>
-    <a href="#data-collection">Data Collection</a>
-    <a href="#data-vis">Data Visualization</a>
-    <a href="#internet-mapping">Internet Mapping</a>
-    <a href="#cybersecurity">Cybersecurity</a>
-    <a href="#contact">Contact</a>
-  </nav>
+        <h1 class="hero-title">
+          Pioneering <span class="highlight">Data &amp; AI</span> Achievements
+        </h1>
 
-  <!-- HERO -->
-  <div class="hero-wrapper" id="home">
-    <div class="hero-inner">
-      <div class="hero">
-        <!-- Left -->
-        <div>
-          <div class="hero-kicker">
-            <span class="dot"></span> Research · Data · Policy
+        <p class="hero-subtitle">
+          I am Alfa Victor Lugard, a PhD Candidate in Public Policy &amp; Political Economy and
+          M.Sc. Candidate in Data Analytics at the University of Texas at Dallas. This hub showcases my
+          coursework, empirical research, interactive dashboards, and geospatial projects across
+          data collection, visualization, Internet mapping, and cybersecurity.
+        </p>
+
+        <div class="hero-chips">
+          <span class="chip">PhD · Public Policy &amp; Political Economy</span>
+          <span class="chip">M.Sc. · Data Analytics</span>
+          <span class="chip">R · Python · ArcGIS · Shiny</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="scrollToId('data-visualization')">
+            View Portfolio
+          </button>
+          <button class="btn-secondary" onclick="scrollToId('about')">
+            About Me
+          </button>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="hero-photo"></div>
+
+        <div class="hero-meta-row">
+          <div class="hero-meta-block">
+            <div class="hero-meta-label">Focus</div>
+            <div class="hero-meta-value">AI &amp; Data-Driven Public Policy</div>
           </div>
-
-          <h1 class="hero-title">
-            Pioneering <span class="highlight">Data &amp; AI</span> Achievements
-          </h1>
-
-          <p class="hero-subtitle">
-            I am Alfa Victor Lugard, a PhD Candidate in Public Policy &amp; Political
-            Economy and M.Sc. Candidate in Data Analytics at the University of Texas
-            at Dallas. This hub showcases my coursework, empirical research, and
-            geospatial projects across data collection, visualization, and
-            cybersecurity.
-          </p>
-
-          <div class="hero-meta">
-            <div class="meta-pill">PhD · Public Policy &amp; Political Economy</div>
-            <div class="meta-pill">M.Sc. · Data Analytics</div>
-            <div class="meta-pill">ArcGIS · R · Python</div>
-          </div>
-
-          <div class="hero-actions">
-            <a href="#data-vis" class="btn-primary">
-              View Portfolio
-            </a>
-            <a href="#about" class="btn-ghost">
-              About Me
-            </a>
+          <div class="hero-meta-block">
+            <div class="hero-meta-label">Location</div>
+            <div class="hero-meta-value">Texas, United States</div>
           </div>
         </div>
 
-        <!-- Right -->
-        <aside class="hero-card">
-          <div class="hero-photo">
-            <!-- Your GitHub profile photo -->
-            <img src="profile.jpg" alt="Alfa Victor Lugard" />
-            <div class="hero-photo-badge">
-              <span class="dot"></span>
-              <span>Active Researcher · UTD</span>
-            </div>
-          </div>
+        <div class="hero-meta-row">
+          <span class="badge-status">
+            <span class="badge-status-dot"></span> Active Researcher · UTD
+          </span>
+        </div>
+      </aside>
+    </section>
 
-          <div class="hero-card-footer">
-            <div>
-              <span class="label">Focus</span><br />
-              AI &amp; Data-Driven Public Policy
+    <!-- MAIN SECTIONS (ONE PAGE) -->
+    <div class="sections-wrapper">
+
+      <!-- About / CV / etc as ACCORDIONS -->
+      <div class="section-heading">
+        <h2>Portfolio Overview</h2>
+        <small>Click any section title to expand. Only one stays open at a time.</small>
+      </div>
+
+      <!-- ABOUT -->
+      <section id="about" class="accordion-section">
+        <div class="accordion open">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">👤</div>
+              <div>
+                <div>About Me</div>
+                <div class="accordion-subtitle">Background, academic journey, and research focus</div>
+              </div>
             </div>
-            <div>
-              <span class="label">Location</span><br />
-              Texas, United States
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                I am Alfa Victor Lugard, a PhD Candidate in Public Policy &amp; Political Economy and an
+                M.Sc. Candidate in Data Analytics at the University of Texas at Dallas. My work sits at the
+                intersection of political economy, development, and applied data science—covering topics like
+                African development finance, labor markets, and the impact of AI on work.
+              </p>
+              <p style="margin-top:8px;">
+                Methodologically, I rely on R, Python, and ArcGIS for statistical modeling, machine learning,
+                survival analysis, and spatial analytics. This portfolio highlights coursework assignments,
+                dashboards, and research‐driven visualizations.
+              </p>
             </div>
           </div>
-        </aside>
-      </div>
+        </div>
+      </section>
+
+      <!-- CV -->
+      <section id="cv" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">📄</div>
+              <div>
+                <div>Curriculum Vitae</div>
+                <div class="accordion-subtitle">Formal academic &amp; professional profile</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <ul class="item-list">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Download Full CV (PDF)</span>
+                    <span class="item-meta">Most recent academic &amp; professional CV</span>
+                  </div>
+                  <!-- Update this path if your CV file is elsewhere -->
+                  <a class="badge-link" href="cv/Alfa_Victor_Lugard_CV.pdf" target="_blank">
+                    View CV
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATA COLLECTION -->
+      <section id="data-collection" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">📊</div>
+              <div>
+                <div>Data Collection &amp; Production</div>
+                <div class="accordion-subtitle">Scraping, survey design, and data pipelines</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                Assignments exploring government data, web scraping, survey design, and automated pipelines using
+                R for reproducible collection and cleaning.
+              </p>
+              <ul class="item-list" style="margin-top:8px;">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 1 – GovInfo Search &amp; Documentation</span>
+                    <span class="item-meta">Understanding the GovInfo API and metadata structure.</span>
+                  </div>
+                  <!-- Adjust filenames to match your repo exactly -->
+                  <a class="badge-link" href="data-collection/Assignment1.pdf" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 2 – Data Collection Design</span>
+                    <span class="item-meta">Survey &amp; collection workflow planning.</span>
+                  </div>
+                  <a class="badge-link" href="data-collection/Assignment2.pdf" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 3 – Census Mapping</span>
+                    <span class="item-meta">Interactive Census-based mapping project.</span>
+                  </div>
+                  <a class="badge-link" href="data-collection/Assignment3_CensusMap.html" target="_blank">View Map</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 4 – Web Scraping</span>
+                    <span class="item-meta">Web scraping workflow using R (rvest, httr).</span>
+                  </div>
+                  <a class="badge-link" href="data-collection/Assignment4_WebScraping.docx" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 5 – Bulk Download of GovInfo PDFs</span>
+                    <span class="item-meta">
+                      R scripts using <code>purrr</code>, <code>jsonlite</code>, and <code>download.file()</code> to
+                      fetch congressional hearings and official documents.
+                    </span>
+                  </div>
+                  <a class="badge-link" href="data-collection/Assignment5.pdf" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 6 – Text Analytics with quanteda</span>
+                    <span class="item-meta">
+                      Twitter data on the Biden–Xi summit; hashtag networks, mention networks, and LSA models.
+                    </span>
+                  </div>
+                  <a class="badge-link" href="data-collection/Assignment6.pdf" target="_blank">Open</a>
+                </li>
+              </ul>
+              <p style="margin-top:6px;font-size:11px;color:#6b7280;">
+                <em>If any links 404, just update the file names in the HTML to match your GitHub folder.</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATA VISUALIZATION -->
+      <section id="data-visualization" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">📈</div>
+              <div>
+                <div>Data Visualization</div>
+                <div class="accordion-subtitle">R graphics, ggplot2, and interactive Shiny work</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                A collection of assignments demonstrating best practices in color design, base R graphics,
+                and modern <code>ggplot2</code> visualizations, as well as interactive dashboards.
+              </p>
+              <ul class="item-list" style="margin-top:8px;">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 1 – Anscombe’s Quartet &amp; Color Design</span>
+                    <span class="item-meta">Exploring how identical summary statistics can hide very different patterns.</span>
+                  </div>
+                  <a class="badge-link" href="data-visualization/Assignment1.docx" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 2 – Paul Murrell R Examples</span>
+                    <span class="item-meta">Base R graphics and low-level drawing functions.</span>
+                  </div>
+                  <a class="badge-link" href="data-visualization/Assignment2.docx" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 3 – Base R &amp; ggplot2 Visuals</span>
+                    <span class="item-meta">Comparing base graphics and layered grammar of graphics approaches.</span>
+                  </div>
+                  <a class="badge-link" href="data-visualization/Assignment3.docx" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Assignment 4 – Chart Hackathon (ggplot2)</span>
+                    <span class="item-meta">Custom themes, faceting, and storytelling charts.</span>
+                  </div>
+                  <a class="badge-link" href="data-visualization/Assignment4.docx" target="_blank">Open</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Interactive Shiny App</span>
+                    <span class="item-meta">
+                      Interactive R Shiny dashboard (e.g., crime mapping or economic indicators).
+                    </span>
+                  </div>
+                  <!-- TODO: Update this link to your actual Shiny app URL or HTML file -->
+                  <a class="badge-link" href="data-visualization/shiny_app.html" target="_blank">Launch Shiny</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERNET MAPPING -->
+      <section id="internet-mapping" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">🗺️</div>
+              <div>
+                <div>Internet Mapping</div>
+                <div class="accordion-subtitle">ArcGIS Online dashboards, scenes, and experiences</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                Geospatial work built with ArcGIS Online, including dashboards, 3D web scenes, and narrative
+                experiences that combine maps, charts, and text.
+              </p>
+              <ul class="item-list" style="margin-top:8px;">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Internet Mapping Dashboard</span>
+                    <span class="item-meta">ArcGIS Instant Dashboard of key indicators.</span>
+                  </div>
+                  <a class="badge-link" href="https://utdepps.maps.arcgis.com/apps/dashboards/9997f67d0ed8491da1d78ac751ea1d34" target="_blank">
+                    Open Dashboard
+                  </a>
+                </li>
+
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Interactive Story Experience 1</span>
+                    <span class="item-meta">ArcGIS Experience Builder project.</span>
+                  </div>
+                  <a class="badge-link" href="https://experience.arcgis.com/experience/919e6074d0a3478698abdd6064b0539e" target="_blank">
+                    View Experience
+                  </a>
+                </li>
+
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">3D Web Scene</span>
+                    <span class="item-meta">ArcGIS 3D scene showing multi-layered spatial context.</span>
+                  </div>
+                  <a class="badge-link" href="https://utdepps.maps.arcgis.com/home/webscene/viewer.html?webscene=2abee3e275c34ab989912d0e828da437" target="_blank">
+                    View Scene
+                  </a>
+                </li>
+
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Slider App</span>
+                    <span class="item-meta">ArcGIS Instant App (Slider) for temporal comparison.</span>
+                  </div>
+                  <a class="badge-link" href="https://utdepps.maps.arcgis.com/apps/instant/slider/index.html?appid=a992080059be40ef9b6209bdb5ec96d1" target="_blank">
+                    Open Slider
+                  </a>
+                </li>
+
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Interactive Story Experience 2</span>
+                    <span class="item-meta">Extended spatial narrative with multiple views.</span>
+                  </div>
+                  <a class="badge-link" href="https://experience.arcgis.com/experience/2cfa3dfc9a0a49bcabccace27dd88e29" target="_blank">
+                    View Experience
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CYBERSECURITY -->
+      <section id="cybersecurity" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">🔐</div>
+              <div>
+                <div>Cybersecurity</div>
+                <div class="accordion-subtitle">Google Cybersecurity Professional Certificate modules</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                Selected PDFs from the Google Cybersecurity Professional Certificate, documenting your
+                progress in risk management, Linux &amp; SQL, network security, and more.
+              </p>
+              <ul class="item-list" style="margin-top:8px;">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Foundations of Cybersecurity</span>
+                    <span class="item-meta">Core security concepts, threat types, and roles.</span>
+                  </div>
+                  <a class="badge-link" href="cybersecurity/Foundations of Cybersecurity.pdf" target="_blank">Open PDF</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Play It Safe: Manage Security Risks</span>
+                    <span class="item-meta">Risk frameworks, controls, and mitigation strategies.</span>
+                  </div>
+                  <a class="badge-link" href="cybersecurity/Play It Safe Manage Security Risks.pdf" target="_blank">Open PDF</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Tools of the Trade: Linux &amp; SQL</span>
+                    <span class="item-meta">Command-line tooling and SQL for security analytics.</span>
+                  </div>
+                  <a class="badge-link" href="cybersecurity/Tools of the Trade Linux and SQL.pdf" target="_blank">Open PDF</a>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Connect &amp; Protect: Networks &amp; Network Security</span>
+                    <span class="item-meta">Network architectures, protocols, and defense strategies.</span>
+                  </div>
+                  <a class="badge-link" href="cybersecurity/Connect and Protect Networks and Network Security.pdf" target="_blank">Open PDF</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="accordion-section">
+        <div class="accordion">
+          <div class="accordion-header">
+            <div class="accordion-title">
+              <div class="accordion-icon">✉️</div>
+              <div>
+                <div>Contact</div>
+                <div class="accordion-subtitle">Get in touch for collaboration or research questions</div>
+              </div>
+            </div>
+            <div class="accordion-chevron">›</div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-inner">
+              <p>
+                I’m open to collaborations on quantitative research, policy evaluation, data visualization,
+                and geospatial analysis projects.
+              </p>
+              <ul class="item-list" style="margin-top:8px;">
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">Email</span>
+                    <span class="item-meta">Primary academic contact</span>
+                  </div>
+                  <span class="badge-link">victor.lugard@utdallas.edu</span>
+                </li>
+                <li>
+                  <div class="item-main">
+                    <span class="item-title">GitHub Portfolio</span>
+                    <span class="item-meta">Browse source code and course projects.</span>
+                  </div>
+                  <a class="badge-link" href="https://github.com/Lordlugar50" target="_blank">Open GitHub</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © 2025 Alfa Victor Lugard · All Rights Reserved
+      </footer>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Profile</div>
-          <h2 class="section-title">About Me</h2>
-          <p class="section-subtitle">
-            A brief overview of my academic path, research interests, and skills.
-          </p>
-        </header>
-
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Academic Journey</h3>
-            <p>
-              I am a PhD Candidate in Public Policy &amp; Political Economy and an
-              M.Sc. Candidate in Data Analytics at The University of Texas at Dallas.
-              My work sits at the intersection of political economy, development,
-              and applied data science.
-            </p>
-            <p>
-              I am particularly interested in topics such as structural adjustment
-              programs, resource-backed loans, African development, and labor-market
-              outcomes in the United States.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Methods &amp; Tools</h3>
-            <p>
-              I work extensively with R, Python, and ArcGIS for statistical analysis,
-              machine learning, survival analysis, spatial analytics, and
-              data visualization.
-            </p>
-            <div class="tag-row">
-              <span class="tag">R · Tidyverse</span>
-              <span class="tag">Machine Learning</span>
-              <span class="tag">GIS / ArcGIS</span>
-              <span class="tag">Text Analytics</span>
-              <span class="tag">Quantitative Methods</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Current Projects</h3>
-            <p>
-              My portfolio includes projects on violent crime in U.S. states,
-              macroeconomic policy reforms, AI and jobs, and African development
-              finance. I also build interactive dashboards and experiences to make
-              complex results accessible.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CV -->
-    <section id="cv">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Curriculum Vitae</div>
-          <h2 class="section-title">My CV</h2>
-          <p class="section-subtitle">
-            View or download my most recent academic CV, including education,
-            teaching, research, and professional experience.
-          </p>
-        </header>
-
-        <article class="card cv-card">
-          <div>
-            <h3>Academic &amp; Research CV</h3>
-            <p>
-              Comprehensive overview of my academic training, methods courses,
-              publications-in-progress, presentations, and technical skills.
-            </p>
-          </div>
-          <div class="cv-actions">
-            <!-- Update the href below to your actual CV file path -->
-            <a href="cv/Alfa_Victor_Lugard_CV.pdf" class="btn-primary" target="_blank">
-              Download CV (PDF)
-            </a>
-            <span class="section-subtitle" style="font-size: 0.8rem;">
-              If the link returns 404, simply update the file path to point to your
-              latest CV.
-            </span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- DATA COLLECTION -->
-    <section id="data-collection">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Assignments · EPPS 6302</div>
-          <h2 class="section-title">Data Collection &amp; Production</h2>
-          <p class="section-subtitle">
-            Selected assignments focused on web scraping, survey design, government
-            data acquisition, and reproducible workflows.
-          </p>
-        </header>
-
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Assignment 1 – GovInfo Web Scraping</h3>
-            <p>
-              Automated download of U.S. government documents from GovInfo using R,
-              JSON/CSV APIs, and functional programming with <code>purrr</code>.
-            </p>
-            <div class="tag-row">
-              <span class="tag">R</span>
-              <span class="tag">Web Scraping</span>
-              <span class="tag">GovInfo</span>
-            </div>
-            <ul class="resource-list">
-              <li>
-                <a href="data-collection/assignment05_govtdata.pdf" target="_blank">
-                  Report: Scraping Government Data (PDF)
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Assignments 2–4 – Census &amp; Web Data</h3>
-            <p>
-              Additional exercises working with census APIs, HTML tables, and
-              structured web data. These assignments emphasize documentation and
-              error handling.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="data-collection/Assignment%201.pdf.docx" target="_blank">
-                  Assignment 1 – PDF/Docx
-                </a>
-              </li>
-              <li>
-                <a href="data-collection/Assignment%202.pdf.docx" target="_blank">
-                  Assignment 2 – Census &amp; APIs
-                </a>
-              </li>
-              <li>
-                <a href="data-collection/Assignment3_CensusMap.html" target="_blank">
-                  Assignment 3 – Census Mapping (HTML)
-                </a>
-              </li>
-              <li>
-                <a href="data-collection/Assignment%204_WebScraping.docx" target="_blank">
-                  Assignment 4 – Web Scraping
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Assignment 5 – Additional Work</h3>
-            <p>
-              Further extension of data collection skills, integrating large-scale
-              document downloads, timing, and storage management.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="data-collection/Assignment5.pdf" target="_blank">
-                  Assignment 5 – Data Collection (PDF)
-                </a>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- DATA VISUALIZATION -->
-    <section id="data-vis">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Assignments · EPPS 6356</div>
-          <h2 class="section-title">Data Visualization</h2>
-          <p class="section-subtitle">
-            A selection of visualization assignments, from classic statistical
-            graphics to custom ggplot2 chart design and hackathons.
-          </p>
-        </header>
-
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Assignments 1–4 – Foundations</h3>
-            <p>
-              Early assignments using Anscombe’s Quartet, Paul Murrell examples,
-              Base R graphics, and ggplot2 styling to emphasize principles of
-              perception, color, and design.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="data-visualization/Assignment%201.docx.docx" target="_blank">
-                  Assignment 1 – Anscombe &amp; Color Design
-                </a>
-              </li>
-              <li>
-                <a href="data-visualization/Assignment%202.docx.docx" target="_blank">
-                  Assignment 2 – Paul Murrell R Examples
-                </a>
-              </li>
-              <li>
-                <a href="data-visualization/Assignment%203.docx.docx" target="_blank">
-                  Assignment 3 – Base R &amp; ggplot2
-                </a>
-              </li>
-              <li>
-                <a href="data-visualization/Assignment%204.docx.docx" target="_blank">
-                  Assignment 4 – Chart Hackathon
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Violent Crime in U.S. States</h3>
-            <p>
-              A full data visualization project using choropleth maps and multiple
-              panels to compare violent crime, poverty, and unemployment rates
-              across U.S. states.
-            </p>
-            <div class="tag-row">
-              <span class="tag">ggplot2</span>
-              <span class="tag">Patchwork</span>
-              <span class="tag">Maps</span>
-            </div>
-            <p>
-              The plots explore regional clustering, outliers, and how socioeconomic
-              indicators co-vary with crime outcomes.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Text Analytics &amp; Networks</h3>
-            <p>
-              Visual exploration of Twitter conversations about the Biden–Xi 2021
-              summit using <code>quanteda</code> and network plots of hashtags and
-              @mentions.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Quanteda</span>
-              <span class="tag">Text Networks</span>
-              <span class="tag">LSA</span>
-            </div>
-            <ul class="resource-list">
-              <li><a href="data-visualization/top_hashtags.png" target="_blank">Top Hashtags Plot (PNG)</a></li>
-              <li><a href="data-visualization/top_mentions.png" target="_blank">Top @Mentions Plot (PNG)</a></li>
-              <li><a href="data-visualization/hashtag_network.png" target="_blank">Hashtag Network (PNG)</a></li>
-              <li><a href="data-visualization/mention_network.png" target="_blank">Mention Network (PNG)</a></li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERNET MAPPING -->
-    <section id="internet-mapping">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">GISC · Internet Mapping</div>
-          <h2 class="section-title">Internet Mapping &amp; ArcGIS</h2>
-          <p class="section-subtitle">
-            Interactive web maps, dashboards, and 3D scenes built with ArcGIS
-            Online and Experience Builder, including violent crime visualizations.
-          </p>
-        </header>
-
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Violent Crime Dashboard</h3>
-            <p>
-              An ArcGIS Dashboard summarizing violent crime metrics across U.S.
-              states with interactive filters and summary panels.
-            </p>
-            <div class="tag-row">
-              <span class="tag">ArcGIS Dashboards</span>
-              <span class="tag">Crime Data</span>
-            </div>
-            <div class="link-row">
-              <a href="https://utdepps.maps.arcgis.com/apps/dashboards/9997f67d0ed8491da1d78ac751ea1d34" target="_blank">
-                Open Dashboard →
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Violent Crime Story Experience</h3>
-            <p>
-              An ArcGIS Experience that walks users through patterns of violent
-              crime using maps, text panels, and sidecar storytelling.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Experience Builder</span>
-              <span class="tag">Story Map</span>
-            </div>
-            <ul class="resource-list">
-              <li>
-                <a href="https://experience.arcgis.com/experience/919e6074d0a3478698abdd6064b0539e" target="_blank">
-                  Crime Experience – Version 1
-                </a>
-              </li>
-              <li>
-                <a href="https://experience.arcgis.com/experience/2cfa3dfc9a0a49bcabccace27dd88e29" target="_blank">
-                  Crime Experience – Version 2
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>3D Scene &amp; Time Slider</h3>
-            <p>
-              Additional ArcGIS apps showcasing 3D visualization and temporal
-              patterns using slider controls and a web scene viewer.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="https://utdepps.maps.arcgis.com/home/webscene/viewer.html?webscene=2abee3e275c34ab989912d0e828da437" target="_blank">
-                  3D Web Scene Viewer
-                </a>
-              </li>
-              <li>
-                <a href="https://utdepps.maps.arcgis.com/apps/instant/slider/index.html?appid=a992080059be40ef9b6209bdb5ec96d1" target="_blank">
-                  Instant App – Time Slider
-                </a>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CYBERSECURITY -->
-    <section id="cybersecurity">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Google Cybersecurity Certificate</div>
-          <h2 class="section-title">Cybersecurity Foundations</h2>
-          <p class="section-subtitle">
-            Selected modules from the Google Cybersecurity Professional Certificate,
-            demonstrating security mindset, risk management, and basic tools.
-          </p>
-        </header>
-
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Foundations of Cybersecurity</h3>
-            <p>
-              Introduction to core concepts: confidentiality, integrity,
-              availability, threat models, and the role of a cybersecurity analyst.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="cybersecurity/Foundations of Cybersecurity.pdf" target="_blank">
-                  Foundations of Cybersecurity (PDF)
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Managing Security Risks</h3>
-            <p>
-              Identifying, assessing, and prioritizing security risks using
-              frameworks and controls.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="cybersecurity/Play It Safe Manage Security Risks.pdf" target="_blank">
-                  Play It Safe: Manage Security Risks (PDF)
-                </a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Linux · SQL · Network Security</h3>
-            <p>
-              Hands-on experience with Linux commands, SQL for log analysis, and
-              principles of network protection and monitoring.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="cybersecurity/Tools of the Trade Linux and SQL.pdf" target="_blank">
-                  Tools of the Trade: Linux &amp; SQL (PDF)
-                </a>
-              </li>
-              <li>
-                <a href="cybersecurity/Connect and Protect Networks and Network Security.pdf" target="_blank">
-                  Connect &amp; Protect: Networks &amp; Security (PDF)
-                </a>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-inner">
-        <header class="section-header">
-          <div class="section-kicker">Let’s Connect</div>
-          <h2 class="section-title">Contact &amp; Links</h2>
-          <p class="section-subtitle">
-            Feel free to reach out regarding research collaboration, data projects,
-            or opportunities in public policy, analytics, and geospatial work.
-          </p>
-        </header>
-
-        <div class="contact-grid">
-          <article class="card">
-            <h3>Primary Contact</h3>
-            <ul class="contact-list">
-              <li>
-                Email:
-                <a href="mailto:your.email@utdallas.edu">
-                  your.email@utdallas.edu
-                </a>
-                <span class="pill-muted">Preferred</span>
-              </li>
-              <li>
-                GitHub:
-                <a href="https://github.com/Lordlugar50" target="_blank">
-                  github.com/Lordlugar50
-                </a>
-              </li>
-              <li>
-                Location: Dallas–Fort Worth Area, Texas, USA
-              </li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Professional Profiles</h3>
-            <p>
-              Add links to your LinkedIn, Google Scholar, ORCID, or personal pages
-              here.
-            </p>
-            <ul class="resource-list">
-              <li>
-                <a href="#" target="_blank">
-                  LinkedIn Profile (add link)
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  Google Scholar / Research Profile
-                </a>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Alfa Victor Lugard · All Rights Reserved · Hosted on GitHub Pages
-  </footer>
-
-  <!-- Small JS for mobile nav + active link -->
   <script>
-    const navToggle = document.getElementById("navToggle");
-    const navMobile = document.getElementById("navMobile");
-    const navLinksDesktop = document.querySelectorAll(".nav-links a");
-    const navLinksMobile = document.querySelectorAll(".nav-links-mobile a");
-
-    navToggle.addEventListener("click", () => {
-      const isOpen = navMobile.style.display === "block";
-      navMobile.style.display = isOpen ? "none" : "block";
-    });
-
-    function setActiveLink(id) {
-      [...navLinksDesktop].forEach((a) => {
-        if (a.getAttribute("href") === "#" + id) {
-          a.classList.add("active");
-        } else {
-          a.classList.remove("active");
-        }
-      });
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    [...navLinksMobile].forEach((a) => {
-      a.addEventListener("click", () => {
-        navMobile.style.display = "none";
+    // Smooth scroll & active nav
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").replace("#", "");
+        scrollToId(targetId);
       });
     });
 
-    const sections = document.querySelectorAll("section, #home");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveLink(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-60% 0px -35% 0px", threshold: 0 }
-    );
+    // Update active nav on scroll
+    const sections = document.querySelectorAll("section[id]");
+    window.addEventListener("scroll", () => {
+      let currentId = "home";
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) {
+          currentId = sec.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === "#" + currentId
+        );
+      });
+    });
 
-    sections.forEach((section) => observer.observe(section));
+    // Accordion logic (only one open at a time)
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(acc => {
+      const header = acc.querySelector(".accordion-header");
+      header.addEventListener("click", () => {
+        if (acc.classList.contains("open")) {
+          acc.classList.remove("open");
+        } else {
+          accordions.forEach(a => a.classList.remove("open"));
+          acc.classList.add("open");
+        }
+      });
+    });
   </script>
 </body>
 </html>
