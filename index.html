@@ -596,90 +596,57 @@
       </div>
     </nav>
 
-   <!-- HERO (FULL WIDTH, CLEAN, MINIMAL) -->
-<section id="home" class="hero-full" style="
-  width: 100%;
-  padding: 80px 40px;
-  background: radial-gradient(circle at center, #0f172a, #020617);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-  flex-wrap: wrap;
-">
+ <!-- HERO -->
+<section id="home" class="hero" style="margin-top: 10px;">
 
-  <!-- LEFT SIDE — LARGE HEADLINE -->
-  <div style="flex: 1; min-width: 320px; text-align: left;">
-    
-    <h1 style="
-      font-size: 54px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: white;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    ">
-      Cybersecurity<br>
-      Social Data Analytics<br>
-      Public Policy
+  <div class="hero-left">
+    <div class="hero-tagline">
+      <span class="hero-tagline-dot"></span>
+      <span>Cybersecurity • Data Analytics • Public Policy</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="highlight"> Social Data Analytics, Public Policy and Political Economy,  Cybersecurity</span>
     </h1>
 
-    <p style="
-      color: #cbd5e1;
-      font-size: 15px;
-      max-width: 500px;
-      margin-bottom: 20px;
-    ">
-      PhD Candidate specializing in cybersecurity, public policy & political economy, 
-      and applied social data analytics.
+    <p class="hero-subtitle">
+      PhD Candidate specializing in social data analytics, cybersecurity, and public policy and political economy research.
     </p>
 
-    <a href="#data-visualization" style="
-      display: inline-block;
-      padding: 10px 22px;
-      border: 1px solid #64748b;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      margin-top: 10px;
-    ">
-      View Portfolio →
-    </a>
-
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollToId('data-visualization')">
+        View Portfolio
+      </button>
+      <button class="btn-secondary" onclick="scrollToId('about')">
+        About Me
+      </button>
+    </div>
   </div>
 
-  <!-- RIGHT SIDE — PORTRAIT PHOTO -->
-  <div style="
-    flex: 1;
-    max-width: 420px;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  ">
-
-    <!-- PROFILE PHOTO -->
-    <div style="
-      width: 100%;
-      height: 320px;
-      border-radius: 16px;
-      background: url('profile.jpg') center top / cover no-repeat;
-      margin-bottom: 16px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  <aside class="hero-right" style="padding: 12px;">
+    <div class="hero-photo" style="
+      border-radius: 20px;
+      height: 280px;
+      background: #020617 url('profile.jpg') center top / cover no-repeat;
     "></div>
 
-    <!-- SMALL META TEXT -->
-    <p style="
-      color: #cbd5e1;
-      font-size: 13px;
-      text-align: center;
-      margin-bottom: 8px;
-    ">
-      Based in Texas, United States · Active Researcher (UTD)
-    </p>
+    <div class="hero-meta-row">
+      <div class="hero-meta-block">
+        <div class="hero-meta-label">Focus</div>
+        <div class="hero-meta-value">Data Analytics & Cybersecurity</div>
+      </div>
+      <div class="hero-meta-block">
+        <div class="hero-meta-label">Location</div>
+        <div class="hero-meta-value">Texas, United States</div>
+      </div>
+    </div>
 
-  </div>
+    <div class="hero-meta-row">
+      <span class="badge-status">
+        <span class="badge-status-dot"></span> Active Researcher · UTD
+      </span>
+    </div>
+  </aside>
 
 </section>
 
