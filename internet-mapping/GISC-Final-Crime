@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Crime in US 50 States (2022) – Final Project</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" />
+
+  <style>
+    html, body, #appContainer {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #appContainer {
+      display: flex;
+    }
+    .view {
+      flex: 1;
+      position: relative;
+    }
+    .viewDiv {
+      height: 100%;
+      width: 100%;
+    }
+    .viewTitle {
+      position: absolute;
+      z-index: 20;
+      top: 10px;
+      left: 10px;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.8);
+      font-size: 14px;
+      border-radius: 4px;
+    }
+  </style>
+
+  <script src="https://js.arcgis.com/4.30/"></script>
+</head>
+
+<body>
+  <div id="appContainer">
+    <div class="view">
+      <div class="viewTitle">2D Map – Crime in US 50 States (2022)</div>
+      <div id="viewDiv2D" class="viewDiv"></div>
+    </div>
+
+    <div class="view">
+      <div class="viewTitle">3D Globe – Crime in US 50 States (2022)</div>
+      <div id="viewDiv3D" class="viewDiv"></div>
+    </div>
+  </div>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/views/SceneView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/LayerList",
+      "esri/widgets/Expand",
+      "esri/widgets/DistanceMeasurement2D",
+      "esri/widgets/AreaMeasurement3D",
+      "esri/widgets/Search",
+      "esri/widgets/Legend"
+    ], function(
+      Map,
+      MapView,
+      SceneView,
+      FeatureLayer,
+      BasemapGallery,
+      LayerList,
+      Expand,
+      DistanceMeasurement2D,
+      AreaMeasurement3D,
+      Search,
+      Legend
+    ) {
+
+      const serviceUrl =
+        "https://services2.arcgis.com/VNo0ht0YPXJoI4oE/arcgis/rest/services/US_State_Crime_with_URLs/FeatureServer/0";
+
+      // ============================
+      // POPUP TEMPLATE (SHARED)
+      // ============================
+
+      const crimePopup = {
+        title: "{Location}",
+        content: `
+          <b>Crime Rate (2022):</b> {2022}<br><br>
+          <b>Crime Rate (2021):</b> {2021}<br>
+          <b>Crime Rate (2020):</b> {2020}<br>
+          <b>Crime Rate (2019):</b> {2019}<br>
+          <b>Crime Rate (2018):</b> {2018}<br><br>
+          <b>Wikipedia:</b> <a href="{State_Wikipedia_URL}" target="_blank">Open Page</a>
+        `
+      };
+
+      // ============================
+      // RENDERER FOR BOTH 2D & 3D
+      // ============================
+
+      const crimeRenderer = {
+        type: "simple",
+        symbol: {
+          type: "simple-marker",
+          color: [178, 34, 34, 0.85],
+          outline: { color: "white", width: 0.7 }
+        },
+        visualVariables: [
+          {
+            type: "size",
+            field: "2022",
+            stops: [
+              { value: 100, size: 6 },
+              { value: 400, size: 16 },
+              { value: 800, size: 30 }
+            ]
+          },
+          {
+            type: "color",
+            field: "2022",
+            stops: [
+              { value: 100, color: "#fee8c8" },
+              { value: 400, color: "#fdbb84" },
+              { value: 800, color: "#b30000" }
+            ]
+          }
+        ]
+      };
+
+      // separate layers for each view (same renderer)
+      const crimeLayer2D = new FeatureLayer({
+        url: serviceUrl,
+        title: "Crime in US 50 States 2022 (2D)",
+        renderer: crimeRenderer,
+        popupTemplate: crimePopup
+      });
+
+      const crimeLayer3D = new FeatureLayer({
+        url: serviceUrl,
+        title: "Crime in US 50 States 2022 (3D)",
+        renderer: crimeRenderer,
+        popupTemplate: crimePopup
+      });
+
+      // ============================
+      // 2D MAP + VIEW
+      // ============================
+
+      const map2D = new Map({
+        basemap: "topo-vector",
+        layers: [crimeLayer2D]
+      });
+
+      const view2D = new MapView({
+        container: "viewDiv2D",
+        map: map2D,
+        center: [-98, 39],
+        zoom: 4
+      });
+
+      // ============================
+      // 3D MAP + VIEW
+      // ============================
+
+      const map3D = new Map({
+        basemap: "topo-vector"
+      });
+
+      const view3D = new SceneView({
+        container: "viewDiv3D",
+        map: map3D,
+        camera: {
+          position: { x: -98, y: 39, z: 15000000 },
+          tilt: 0
+        }
+      });
+
+      view3D.when(function() {
+        map3D.add(crimeLayer3D);
+      });
+
+      // ============================
+      // WIDGETS (2D)
+      // ============================
+
+      // BasemapGallery in Expand
+      const basemapGallery = new BasemapGallery({ view: view2D });
+      const basemapExpand = new Expand({
+        view: view2D,
+        content: basemapGallery,
+        expandIconClass: "esri-icon-basemap",
+        expandTooltip: "Change basemap"
+      });
+      view2D.ui.add(basemapExpand, "top-right");
+
+      // LayerList in Expand
+      const layerList = new LayerList({ view: view2D });
+      const layerListExpand = new Expand({
+        view: view2D,
+        content: layerList,
+        expandIconClass: "esri-icon-layers",
+        expandTooltip: "Layer list"
+      });
+      view2D.ui.add(layerListExpand, "top-right");
+
+      // Search widget
+      const searchWidget = new Search({
+        view: view2D,
+        includeDefaultSources: true
+      });
+      view2D.ui.add(searchWidget, "top-left");
+
+      // Legend in Expand
+      const legend = new Legend({
+        view: view2D,
+        layerInfos: [{ layer: crimeLayer2D, title: "Violent crime rate (per 100,000)" }]
+      });
+      const legendExpand = new Expand({
+        view: view2D,
+        content: legend,
+        expandIconClass: "esri-icon-layer-list",
+        expandTooltip: "Legend"
+      });
+      view2D.ui.add(legendExpand, "bottom-right");
+
+      // Distance measurement
+      const distanceMeasure2D = new DistanceMeasurement2D({ view: view2D });
+      view2D.ui.add(distanceMeasure2D, "bottom-left");
+
+      // ============================
+      // WIDGETS (3D)
+      // ============================
+
+      const areaMeasure3D = new AreaMeasurement3D({ view: view3D });
+      view3D.ui.add(areaMeasure3D, "bottom-left");
+
+    });
+  </script>
+</body>
+</html>
