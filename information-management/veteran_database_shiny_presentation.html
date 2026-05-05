@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>veteran_database_shiny_presentation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="veteran_database_shiny_presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="veteran_database_shiny_presentation_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="veteran_database_shiny_presentation_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="veteran_database_shiny_presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="veteran_database_shiny_presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="veteran_database_shiny_presentation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="veteran_database_shiny_presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="veteran_database_shiny_presentation_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="veteran_database_shiny_presentation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="veteran_database_shiny_presentation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="veteran_database_shiny_presentation_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="title" class="level2">
+<h2 class="anchored" data-anchor-id="title">Title</h2>
+<section id="design-and-implementation-of-a-database-driven-sqlite-shiny-app-for-the-analysis-of-u.s.-veteran-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="design-and-implementation-of-a-database-driven-sqlite-shiny-app-for-the-analysis-of-u.s.-veteran-outcomes">Design and Implementation of a Database-Driven SQLite Shiny-App for the Analysis of U.S. Veteran Outcomes</h3>
+<p><strong>Alfa Victor Lugard</strong><br>
+University of Texas at Dallas<br>
+EPPS 6354: Information Management / Database Systems Project</p>
+<hr>
+</section>
+</section>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This project develops a database-driven Shiny dashboard for analyzing U.S. veteran outcomes using a SQLite backend. The goal was to move beyond a flat-file workflow and build a complete information-management pipeline that connects data, database structure, SQL querying, application design, and live deployment.</p>
+<p>The system was designed to support interactive exploration of veteran demographics, labor-force outcomes, poverty, disability, insurance coverage, and state-level variation. The final product was deployed online as a working Shiny application.</p>
+<hr>
+</section>
+<section id="research-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="research-motivation">Research Motivation</h2>
+<p>Veteran outcomes are multidimensional and cannot be fully understood through static tables alone. Variables such as disability, poverty, employment, labor-force participation, and insurance status interact in meaningful ways and often vary across states and years.</p>
+<p>An interactive dashboard allows users to move from raw records to summary indicators, state rankings, and map-based comparisons in a more flexible and policy-relevant way.</p>
+<hr>
+</section>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
+<p>The data for this study were drawn from the <strong>Integrated Public Use Microdata Series (IPUMS USA)</strong> version of the <strong>American Community Survey (ACS)</strong> and cover the years <strong>2019 to 2024</strong>. The working dataset was constructed as a veteran-only file from the ACS microdata and contains more than <strong>1.1 million veteran observations</strong>, making it suitable for large-scale descriptive and multivariate analysis.</p>
+<hr>
+</section>
+<section id="data-to-system-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="data-to-system-pipeline">Data-to-System Pipeline</h2>
+<section id="data---database---application---webserver" class="level3">
+<h3 class="anchored" data-anchor-id="data---database---application---webserver">DATA -&gt; DATABASE -&gt; APPLICATION -&gt; WEBSERVER</h3>
+<p>The project followed a structured information systems workflow. First, the cleaned veteran-level ACS/IPUMS data were stored as a working file. Second, the file was converted into a SQLite database. Third, the database was connected to a Shiny application through SQL queries. Finally, the application was deployed online through shinyapps.io.</p>
+<p>This pipeline ensured that the dashboard functioned as a real database-backed application rather than a static visualization page.</p>
+<hr>
+</section>
+</section>
+<section id="database-design" class="level2">
+<h2 class="anchored" data-anchor-id="database-design">Database Design</h2>
+<p>The database was designed around a central observation-level table called <strong>VETERAN_RECORD</strong>. This table represents one veteran record and stores most demographic, labor, income, insurance, disability, and housing variables as attributes of the observation.</p>
+<p>A smaller set of lookup tables was used to structure the data more clearly. These include <strong>YEAR</strong>, <strong>STATE</strong>, <strong>EDUCATION_CATEGORY</strong>, and <strong>SCD_RATING_CATEGORY</strong>. This design is more defensible than splitting every variable group into separate parent tables.</p>
+<hr>
+</section>
+<section id="recommended-tables" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-tables">Recommended Tables</h2>
+<section id="main-tables-in-the-design" class="level3">
+<h3 class="anchored" data-anchor-id="main-tables-in-the-design">Main Tables in the Design</h3>
+<ul>
+<li><strong>YEAR</strong></li>
+<li><strong>STATE</strong></li>
+<li><strong>EDUCATION_CATEGORY</strong></li>
+<li><strong>SCD_RATING_CATEGORY</strong></li>
+<li><strong>VETERAN_RECORD</strong></li>
+</ul>
+<p>This structure reflects a more realistic conceptual schema for the SQLite-backed Shiny app.</p>
+<hr>
+</section>
+</section>
+<section id="relationship-schema" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-schema">Relationship Schema</h2>
+<p><img src="images/Screenshot_5-5-2026_11538_miro.com.jpeg" class="img-fluid"></p>
+</section>
+<section id="application-development" class="level2">
+<h2 class="anchored" data-anchor-id="application-development">Application Development</h2>
+<p>The application was developed in <strong>R Shiny</strong> and connected directly to the SQLite database. SQL queries were used to retrieve filtered and aggregated data for display in tables, state rankings, and visual summaries.</p>
+<p>The dashboard was designed with multiple tabs so that users could move across overview statistics, demographic summaries, state analysis, and raw data views. This made the application useful for both demonstration and exploratory analysis.</p>
+<hr>
+</section>
+<section id="main-dashboard-features" class="level2">
+<h2 class="anchored" data-anchor-id="main-dashboard-features">Main Dashboard Features</h2>
+<p>The final Shiny dashboard includes:</p>
+<ul>
+<li>interactive filtering by year, sex, race, and disability category<br>
+</li>
+<li>state-level rankings<br>
+</li>
+<li>state-level map visualization<br>
+</li>
+<li>descriptive summaries of veteran outcomes<br>
+</li>
+<li>raw data table output<br>
+</li>
+<li>database-backed querying through SQLite and SQL</li>
+</ul>
+<p>These features make the dashboard both a technical database application and a policy-relevant analytical tool.</p>
+<hr>
+</section>
+<section id="data-accuracy-issue-and-improvement" class="level2">
+<h2 class="anchored" data-anchor-id="data-accuracy-issue-and-improvement">Data Accuracy Issue and Improvement</h2>
+<p>One important issue identified during development was the risk of inconsistency between the values displayed on the state map and the values shown in the ranking table. This created the appearance of data mismatch, even though the problem came from display logic rather than fabricated data.</p>
+<p>The solution was to make both the map and ranking table rely on the exact same reactive summary object and the same rounding rules. This improved the analytical credibility of the application and ensured consistency in the displayed values.</p>
+<hr>
+</section>
+<section id="analytical-value" class="level2">
+<h2 class="anchored" data-anchor-id="analytical-value">Analytical Value</h2>
+<p>The dashboard makes it possible to examine how veterans differ across multiple dimensions of well-being, including disability, poverty, employment, and insurance coverage. It also allows state-based comparisons that can reveal geographic variation in veteran outcomes.</p>
+<p>This is especially useful for policy-oriented analysis because it provides a flexible way to move between national summaries, subgroup filters, and geographic patterns in one system.</p>
+<hr>
+</section>
+<section id="strengths-of-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="strengths-of-the-project">Strengths of the Project</h2>
+<p>The project has several strengths. It demonstrates a complete database application workflow, integrates SQL querying with interactive visualization, and uses a live deployed Shiny app rather than a local-only prototype.</p>
+<p>It also improves transparency by combining summary views with direct access to the underlying records. This helps users understand that the visual outputs are grounded in a structured and queryable database system.</p>
+<hr>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>The dashboard is primarily descriptive and exploratory. It can identify patterns in veteran outcomes, but it does not by itself establish causal relationships. In addition, the deployed application still relies on a denormalized SQLite implementation for practical reasons, even though the conceptual schema is more structured.</p>
+<p>Some map readability issues also remain challenging, especially for smaller states. Even so, the project provides a strong foundation for future refinement.</p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>IPUMS USA. (2025). <em>IPUMS USA: American Community Survey microdata</em>.</p>
+<p>Posit. (2025). <em>Shiny: Web application framework for R</em>.</p>
+<p>R Core Team. (2025). <em>R: A language and environment for statistical computing</em>.</p>
+<p>SQLite Development Team. (2025). <em>SQLite documentation</em>.</p>
+<p>U.S. Census Bureau. (2025). <em>American Community Survey documentation</em>.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
